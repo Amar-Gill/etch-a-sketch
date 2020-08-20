@@ -33,7 +33,7 @@
     }
 
     header {
-        width: 960px;
+        width: 720px;
         margin: auto;
         padding-bottom: 8px;
     }
@@ -55,12 +55,12 @@
     #squares-container {
         display: flex;
         flex-wrap: wrap;
-        width: 960px;
         margin: auto;
-        /* grid-template-columns: repeat(16, 12px); */
-        /* margin: auto; */
-        /* width: 60vw; */
-        /* height: 60vh; */
+        border: solid #bc5090 2px;
+        max-width: 725px;
+        min-height: 720px;
+        overflow: hidden;
+        /* background-color: white; */
     }
 
     .square {
@@ -102,9 +102,9 @@
             squaresContainer.removeChild(squaresContainer.lastElementChild);
         }
 
-        gridSize = prompt("Enter grid size:");
+        gridSize = prompt("Enter grid size (1-240):");
 
-        elSize = 960 / gridSize;
+        elSize = 720 / gridSize;
 
         validateInput(gridSize) ? drawGrid() : reset();
     }
@@ -121,8 +121,8 @@
             alert("Please enter a positive integer.")
             return false;
         } else {
-            if (inputString > 180) {
-                alert("Please enter integer smaller than 180");
+            if (inputString > 240) {
+                alert("Please enter integer smaller than 240.");
                 return false;
             }
             return true;
