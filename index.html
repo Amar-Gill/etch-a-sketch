@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Etch-a-sketch</title>
+</head>
+
+<body>
+    <header>
+        <span>etch-a-sketch 0.1.0</span>
+        <button onclick="reset()">Reset</button>
+    </header>
+    <div class="" id="squares-container"></div>
+</body>
+
+<style>
+    html {
+        box-sizing: border-box;
+    }
+
+    *,
+    *:before,
+    *:after {
+        box-sizing: inherit;
+    }
+
+
+    #squares-container {
+        display: flex;
+        flex-wrap: wrap;
+        width: 960px;
+        margin: auto;
+        top: 80px;
+        /* grid-template-columns: repeat(16, 12px); */
+        /* margin: auto; */
+        /* width: 60vw; */
+        /* height: 60vh; */
+    }
+
+    .square {
+        /* height: 12px;
+        width: 12px; */
+        border: solid black 1px;
+        display: inline-block;
+    }
+</style>
+
+<script>
+    const squaresContainer = document.querySelector("#squares-container");
+
+    // get from user input
+    let gridSize = prompt("Enter grid size:");
+
+    // round down
+    let elSize = 960 / gridSize;
+
+    function drawGrid() {
+
+        for (let i = 0; i < gridSize * gridSize; i++) {
+
+            const el = document.createElement("div");
+
+            el.classList.toggle("square");
+
+            // set elements height and width
+            el.style.height = `${elSize}px`;
+            el.style.width = `${elSize}px`;
+
+            el.addEventListener("mouseenter", () => el.style.backgroundColor = "black");
+
+            squaresContainer.appendChild(el);
+        }
+
+    }
+
+    function reset() {
+        while (squaresContainer.firstChild) {
+            squaresContainer.removeChild(squaresContainer.lastElementChild);
+        }
+
+        gridSize = prompt("Enter grid size:");
+
+        elSize = 960 / gridSize;
+
+        isPositiveInt(gridSize) && drawGrid();
+    }
+
+    function isPositiveInt(inputString) {
+        let re = /^[0-9]/;
+
+        if (re.test(inputString)) {
+            console.log("is positive int")
+            return true;
+        } else {
+            console.log("is not positive int");
+            return false;
+        }
+    }
+
+    // first function call on page hydration => put into onload attribute?????????
+    isPositiveInt(gridSize) && drawGrid();
+
+</script>
+
+</html>
