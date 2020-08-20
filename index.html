@@ -9,7 +9,7 @@
 
 <body onload="reset()">
     <header>
-        <span>etch-a-sketch 0.1.0</span>
+        <span>etch-a-sketch <a href="#" alt="source">[source]</a> </span>
         <button onclick="reset()">Reset</button>
     </header>
     <div id="squares-container"></div>
@@ -18,12 +18,38 @@
 <style>
     html {
         box-sizing: border-box;
+        font-family: 'Courier New', Courier, monospace;
     }
 
     *,
     *:before,
     *:after {
         box-sizing: inherit;
+    }
+
+    body {
+        background-color: #004c6d;
+        color: #c1e7ff;
+    }
+
+    header {
+        width: 960px;
+        margin: auto;
+        padding-bottom: 8px;
+    }
+
+    button {
+        float: right;
+        background-color: #004c6d;
+        color: #c1e7ff;
+    }
+
+    a {
+        color: #ffa600;
+    }
+
+    a:visited {
+        color: #bc5090;
     }
 
     #squares-container {
@@ -40,7 +66,8 @@
     .square {
         /* height: 12px;
         width: 12px; */
-        border: solid black 1px;
+        background-color: white;
+        /* border: solid black 1px; */
         display: inline-block;
     }
 </style>
@@ -54,7 +81,7 @@
 
     function drawGrid() {
 
-        for (let i = 0, numSquares = gridSize*gridSize; i < numSquares; i++) {
+        for (let i = 0, numSquares = gridSize * gridSize; i < numSquares; i++) {
 
             const el = document.createElement("div");
 
