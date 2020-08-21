@@ -4,6 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css" />
+    <script async src="script.js"></script>
     <title>Etch-a-sketch</title>
 </head>
 
@@ -17,139 +19,5 @@
     </header>
     <div id="squares-container"></div>
 </body>
-
-<style>
-    html {
-        box-sizing: border-box;
-        font-family: 'Courier New', Courier, monospace;
-    }
-
-    *,
-    *:before,
-    *:after {
-        box-sizing: inherit;
-    }
-
-    body {
-        background-color: #004c6d;
-        color: #c1e7ff;
-    }
-
-    header {
-        width: 720px;
-        margin: auto;
-        padding-bottom: 8px;
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-    }
-
-    button {
-        background-color: #004c6d;
-        color: #c1e7ff;
-    }
-
-    a {
-        color: #ffa600;
-    }
-
-    a:visited {
-        color: #bc5090;
-    }
-
-    #squares-container {
-        display: flex;
-        flex-wrap: wrap;
-        margin: auto;
-        border: solid #bc5090 2px;
-        min-width: 720px;
-        max-width: 725px;
-        min-height: 720px;
-        overflow: hidden;
-        /* background-color: white; */
-    }
-
-    .square {
-        /* height: 12px;
-        width: 12px; */
-        background-color: white;
-        /* border: solid black 1px; */
-        display: inline-block;
-    }
-</style>
-
-<script>
-    const squaresContainer = document.querySelector("#squares-container");
-
-    const eraserControl = document.querySelector("#eraser-control");
-
-    let gridSize;
-
-    let elSize;
-
-    let pixelColor = "black";
-
-    function drawPixel() {
-        this.style.backgroundColor = pixelColor;
-    }
-
-    function drawGrid() {
-
-        for (let i = 0, numSquares = gridSize * gridSize; i < numSquares; i++) {
-
-            const el = document.createElement("div");
-
-            el.classList.toggle("square");
-
-            el.style.height = `${elSize}px`;
-            el.style.width = `${elSize}px`;
-
-            el.addEventListener("mouseenter", drawPixel);
-
-            squaresContainer.appendChild(el);
-        }
-
-    }
-
-    function reset() {
-        while (squaresContainer.firstChild) {
-            squaresContainer.removeChild(squaresContainer.lastElementChild);
-        }
-
-        eraserControl.checked = false;
-        pixelColor = "black";
-
-        gridSize = prompt("Enter grid size (1-240):");
-
-        elSize = 720 / gridSize;
-
-        validateInput(gridSize) ? drawGrid() : reset();
-    }
-
-    function validateInput(inputString) {
-        const re = /[^0-9]/;
-
-        if (inputString === "0") {
-            alert("Please enter a positive integer.")
-            return false;
-        }
-
-        if (re.test(inputString)) {
-            alert("Please enter a positive integer.")
-            return false;
-        } else {
-            if (inputString > 240) {
-                alert("Please enter integer smaller than 240.");
-                return false;
-            }
-            return true;
-        }
-    }
-
-    function toggleEraser() {
-        eraserControl.checked ? pixelColor = "white" : pixelColor = "black";
-    }
-
-</script>
 
 </html>
