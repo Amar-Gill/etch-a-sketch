@@ -10,7 +10,10 @@
 <body onload="reset()">
     <header>
         <span>etch-a-sketch <a href="https://github.com/Amar-Gill/etch-a-sketch" alt="source">[source]</a> </span>
-        <button onclick="reset()">Reset</button>
+        <span>Eraser:
+            <input id="eraser-control" type="checkbox" onclick="toggleEraser()">
+            <button onclick="reset()">Reset</button>
+        </span>
     </header>
     <div id="squares-container"></div>
 </body>
@@ -36,10 +39,12 @@
         width: 720px;
         margin: auto;
         padding-bottom: 8px;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
     }
 
     button {
-        float: right;
         background-color: #004c6d;
         color: #c1e7ff;
     }
@@ -57,6 +62,7 @@
         flex-wrap: wrap;
         margin: auto;
         border: solid #bc5090 2px;
+        min-width: 720px;
         max-width: 725px;
         min-height: 720px;
         overflow: hidden;
@@ -75,9 +81,17 @@
 <script>
     const squaresContainer = document.querySelector("#squares-container");
 
+    const eraserControl = document.querySelector("#eraser-control");
+
     let gridSize;
 
     let elSize;
+
+    let pixelColor = "black";
+
+    function drawPixel() {
+        this.style.backgroundColor = pixelColor;
+    }
 
     function drawGrid() {
 
@@ -90,7 +104,7 @@
             el.style.height = `${elSize}px`;
             el.style.width = `${elSize}px`;
 
-            el.addEventListener("mouseenter", () => el.style.backgroundColor = "black");
+            el.addEventListener("mouseenter", drawPixel);
 
             squaresContainer.appendChild(el);
         }
@@ -101,6 +115,9 @@
         while (squaresContainer.firstChild) {
             squaresContainer.removeChild(squaresContainer.lastElementChild);
         }
+
+        eraserControl.checked = false;
+        pixelColor = "black";
 
         gridSize = prompt("Enter grid size (1-240):");
 
@@ -127,6 +144,10 @@
             }
             return true;
         }
+    }
+
+    function toggleEraser() {
+        eraserControl.checked ? pixelColor = "white" : pixelColor = "black";
     }
 
 </script>
